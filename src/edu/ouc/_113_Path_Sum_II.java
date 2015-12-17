@@ -2,6 +2,7 @@ package edu.ouc;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  *  Given a binary tree and a sum, find all root-to-leaf paths where each path's sum 
@@ -30,35 +31,18 @@ return
 public class _113_Path_Sum_II {
 
 	public List<List<Integer>> pathSum(TreeNode root, int sum) {
-        if(root == null)return null;
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
-        if(root == null) return result;
-        find(root,root.val,sum);
-        
-        //dfs(root,sum,result,new ArrayList<Integer>());
-        return result;
+		List<List<Integer>> list = new ArrayList(new ArrayList<Integer>());
+        return dfs(root,sum,list,new Stack<Integer>());
     }
-    public void dfs(TreeNode root,int sum,List<List<Integer>> result,List<TreeNode> list){
-    	if(root == null) return;
-    	if(root.left == null && root.right == null){
-    		list.add(root);
-    		int tmp = 0;
-    		for(TreeNode node : list){
-    			tmp += node.val;
-    		}
-    		if(tmp == sum){
-    			result.add(list);
-    		}
+    public List<List<Integer>> dfs(TreeNode root,int sum,List<List<Integer>> result,Stack<Integer> path){
+    	if(root == null) return result;
+    	path.push(root.val);
+    	if(root.left == null && root.right == null && sum == root.val){
+    		result.add(new ArrayList<Integer>(path));
     	}
-    	list.add(root.val);
-    	dfs(root.left,sum,result,list);
-    	
-    	dfs(root.right,sum,result,list);
-    }
-    public boolean find(TreeNode r ,int total, int sum){
-        if(r.left == null && r.right == null)	return total == sum;
-    	if(r.left == null)	return find(r.right,total+r.right.val,sum);
-    	if(r.right == null)	return find(r.left,total+r.left.val,sum);
-    	return find(r.right,total+r.right.val,sum) || find(r.left,total+r.left.val,sum);
+    	dfs(root.left,sum-root.val,result,path);
+    	dfs(root.right,sum-root.val,result,path);
+    	path.pop();
+    	return result;
     }
 }
