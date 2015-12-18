@@ -35,6 +35,7 @@ If you notice carefully in the flattened tree, each node's right child points to
 
  * @author wqx
  * @date 2015-12-18
+ * 
  */
 public class _114_Flatten_Binary_Tree_to_Linked_List {
 	private List<TreeNode> preOrder = new ArrayList<TreeNode>(0);
