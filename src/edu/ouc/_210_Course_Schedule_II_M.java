@@ -30,7 +30,6 @@ public class _210_Course_Schedule_II_M {
 			adj.add(v2);
 			graph.put(v1, adj);
 		}
-
 		
 		for(int i = 0; i < numCourses; i++){
 			if(visited[i] == 0 && dfs(i,stack,visited,graph)) return new int[0];
