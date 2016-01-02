@@ -1,5 +1,15 @@
 package edu.ouc;
 
+/**
+ * 
+ * @author wqx
+ * 
+ * preorder  :  [s1,s1+1,....,s1+(pos-s2),s1+(pos-s2)+1,....e1]
+ * inorder   :  [s2..........pos-1,pos,pos+1,...............e2]
+ *  
+ * pos-s2:number of node in left tree.
+ *  
+ */
 public class _105_ConstructBinaryTreefromPreorderAndInorderTraversal_M {
     public TreeNode buildTree(int[] preorder,int[] inorder) {
         return createTree(preorder,0,preorder.length-1,inorder,0,inorder.length-1);
