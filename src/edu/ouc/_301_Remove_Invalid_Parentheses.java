@@ -23,78 +23,119 @@ Examples:
  * @Date 2015-12-06
  */
 public class _301_Remove_Invalid_Parentheses {
-    public static List<String> removeInvalidParentheses(String s) {
-    	Set<String> result = new HashSet<String>();
-        List<Node> invalid = new ArrayList<Node>();
-        
-        invalid = getInvalid(s);
-        System.out.println("getResult(invalid,s)1:" + getResult(invalid,s));
-        result.add(getResult(invalid,s));
-        StringBuffer buf = new StringBuffer(s);
-        String reverse  = buf.reverse().toString();
-        invalid = getInvalid(reverse);
-        System.out.println("getResult(invalid,s)2:" + getResult(invalid,s));
-        result.add(getResult(invalid,s));
-        return new ArrayList<>(result);
-    }
-    public static String getResult(List<Node> invalid,String s){
-    	StringBuilder sb = new StringBuilder();
-        Set<Integer> set = new HashSet<Integer>();
-        for(Node c : invalid){
-        	set.add(c.pos);
+	static Set<String> result = new HashSet<String>();
+	public static List<String> removeInvalidParentheses(String s) {
+		Stack<Character> stack = new Stack<Character>();
+        int left = 0, right = 0;
+        for(int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) == '(') left++;
+            if(s.charAt(i) == ')') {
+                if(left != 0) left--;
+                else right++;
+            }
         }
-        for(int i = 0; i < s.length(); i++){
-        	if(!set.contains(i)){
-        		sb.append(s.charAt(i));
-        	}
-        }
-        return sb.toString();
-    }
-    public static List<Node>  getInvalid(String s){
-        List<Node> invalid = new ArrayList<Node>();
-        Stack<Node> stack = new Stack<Node>();
-        
-        for(int i = 0; i < s.length(); i++){
-        	Node node = new Node(s.charAt(i),i);
-        	if(node.c == '('){
-               	stack.push(node);//push left parenthese into stack 
-        	}
-        	if(node.c == ')'){
-        		if(!stack.empty()){
-        			stack.pop(); 
-        		}else{
-        			invalid.add(node);
-        		}
-        	}
-        	//skip other letters,do nothing
-        }
-        while(!stack.isEmpty()){
-        	invalid.add(stack.pop());
-        }
-        return invalid;
-    }
-    static class Node{
-    	Character c;
-    	int pos;
-    	public Node(Character c,int pos){
-    		this.c = c;
-    		this.pos = pos;
-    	}
-    	public Character getC(){
-    		return c;
-    	}
-    	public int getPos(){
-    		return pos;
-    	}
-    	public boolean equals(Node node){
-    		return node.c.equals(c);
-    	}
-    }
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		String str = "()())()";
-		removeInvalidParentheses(str);
-		
+		dfs(s,stack,0,left,right,0);
+		return new ArrayList<String>(result);
 	}
-
+	public static void dfs(String s,Stack<Character> stack,int index,int left,int right,int symmetry){
+		if(index == s.length() && left == 0 && right == 0 && symmetry == 0){
+			int len = stack.size();
+			StringBuilder sb = new StringBuilder(len);
+			for(int i = 0; i < len; i++){
+				sb.append(stack.get(i));
+			}
+			result.add(sb.toString());
+			return ;
+		}
+		if(index >= s.length() || left < 0 || right < 0 || symmetry < 0) return ;
+		Character c = s.charAt(index);
+		if(c == '('){
+			stack.push(c);
+			dfs(s,stack,index+1,left,right,symmetry+1);
+			stack.pop();
+			dfs(s,stack,index+1,left-1,right,symmetry);
+		}else if(c == ')'){
+			stack.push(c);
+			dfs(s,stack,index+1,left,right,symmetry-1);
+			stack.pop();
+			dfs(s,stack,index+1,left,right-1,symmetry);
+		}else{
+			stack.push(c);
+			dfs(s,stack,index+1,left,right,symmetry);
+			stack.pop();
+		}
+	}
+    public static void main(String[] args){
+    	String s = "((z(((fp))()((((((g(";
+        int left = 0, right = 0;
+        for(int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) == '(') left++;
+            if(s.charAt(i) == ')') {
+                if(left != 0) left--;
+                else right++;
+            }
+        }
+        System.out.println("s:" + s + ",left:" + left + ",right:" + right);
+    	long startTime = System.currentTimeMillis();
+    	removeInvalidParentheses(s);
+    	System.out.println("time:" + (System.currentTimeMillis() - startTime));
+    }
+//	 Set<String> result = new HashSet<String>();
+//	 int invalidNum = 0;
+//	public  List<String> removeInvalidParentheses(String s) {
+//		Stack<Character> stack = new Stack<Character>();
+//       for(int i = 0; i < s.length(); i++){
+//       	if(s.charAt(i) == '('){
+//       		stack.push(s.charAt(i));
+//       	}else if(s.charAt(i) == ')'){
+//       		if(!stack.isEmpty()){
+//       			stack.pop();
+//       		}else{
+//       			invalidNum++;
+//       		}
+//       	}
+//       }
+//       invalidNum+= stack.size();
+//       stack.clear();
+//		dfs(s,stack,0);
+//		return new ArrayList<String>(result);
+//	}
+//	public  void dfs(String s,Stack<Character> stack,int index){
+//		if(index == s.length()){
+//			if((stack.size()+invalidNum) != s.length()){
+//				return ;
+//			}
+//			if(!validate(stack)){
+//				return ;
+//			}
+//			int len = stack.size();
+//			StringBuilder sb = new StringBuilder(len);
+//			for(int i = 0; i < len; i++){
+//				sb.append(stack.get(i));
+//			}
+//			result.add(sb.toString());
+//			return ;
+//		}
+//		if((index - stack.size()) > invalidNum) return ;
+//		Character c = s.charAt(index);
+//		stack.push(c);
+//		dfs(s,stack,index+1);
+//		stack.pop();
+//		dfs(s,stack,index+1);
+//	}
+//	public  boolean validate(Stack<Character> str){
+//		Stack<Character> stack = new Stack<Character>();
+//       for(int i = 0; i < str.size(); i++){
+//       	if(str.get(i) == '('){
+//       		stack.push(str.get(i));
+//       	}else if(str.get(i) == ')'){
+//       		if(!stack.isEmpty()){
+//       			stack.pop();
+//       		}else{
+//       			return false;
+//       		}
+//       	}
+//       }
+//       return stack.isEmpty();
+//	}
 }
