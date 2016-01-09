@@ -31,7 +31,7 @@ public class _199_Binary_Tree_Right_Side_View_M {
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
         queue.offer(root);
         while(!queue.isEmpty()){
-            //保证queue中为通一高度的节点
+            //保证queue中为同一高度的节点
         	int size = queue.size();
             for(int i = 0;i < size; i++){
                 TreeNode node= queue.poll();
