@@ -11,13 +11,13 @@ You may assume that the array is non-empty and the majority element always exist
 in the array.
  * @author wqx
  * 自己的解法：用HashMap，key为数组中的值，value为值出现的次数
+ * 时间复杂度：O(n),空间复杂度：O(n)
  * 
  * Moore's voting algorithm：
  * 该算法思想：
  * 每次找出一对不同的元素，从数组中删掉，知道数组为空或只剩一个元素。
  * 可以证明：如果存在元素e出现次数过半，那么最后剩下的只可能是e。
- * 
- * 
+ * 时间复杂度：O(n),空间复杂度：O(1)
  */
 public class _169_Majority_Element_E {
     public int majorityElement(int[] nums) {
