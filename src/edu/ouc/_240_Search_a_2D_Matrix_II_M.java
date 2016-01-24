@@ -48,7 +48,10 @@ Given target = 20, return false.
  */
 public class _240_Search_a_2D_Matrix_II_M {
 	private static boolean result;
-
+/**
+ * (startRow，startCol)为矩阵的左上角坐标
+ * (endRow，endCol)为矩阵的右下角坐标
+ */
 	public static void search(int[][] matrix, int target,int startRow,int startCol,int endRow,int endCol) {
 		if(startRow == endRow){
 			while(startCol <= endCol){

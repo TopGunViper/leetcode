@@ -15,7 +15,7 @@ in the array.
  * 
  * Moore's voting algorithm：
  * 该算法思想：
- * 每次找出一对不同的元素，从数组中删掉，知道数组为空或只剩一个元素。
+ * 每次找出一对不同的元素，从数组中删掉，直到数组为空或只剩一个元素。
  * 可以证明：如果存在元素e出现次数过半，那么最后剩下的只可能是e。
  * 时间复杂度：O(n),空间复杂度：O(1)
  */
@@ -40,26 +40,34 @@ public class _169_Majority_Element_E {
         int a[] = {1,3,1,3,1,2,2,1,1,4,4};
         printMajority(a, a.length);
     }
-    static void printMajority(int a[], int size)
+     static void printMajority(int a[],int size)
     {
-      /* Find the candidate for Majority*/
-      int cand = findCandidate(a, size);
+      /* 找到可能的候选元素 */
+      int cand = findCandidate(a,a.length);
       
-      /* Print the candidate if it is Majority*/
-      if(isMajority(a, size, cand))
+      /* 判断该元素出现次数是否超过n/2 */
+      if(isMajority(a, a.length, cand))
         System.out.println("cand:" + cand);
       else
     	  System.out.println("NO Majority Element");
     }
-      
-    /* Function to find the candidate for Majority */
+    /**
+     * 找到可能的候选元素  
+     * @param a
+     * @param size
+     * @return
+     */
     static int findCandidate(int a[], int size)
     {
+    	/*
+    	 * maj_index：当前出现次数最多的元素下标，初始为0（即第一个元素）
+    	 * count：出现次数最多的元素的出现次数，初始为1
+    	 */
         int maj_index = 0, count = 1;
         int i;
         for(i = 1; i < size; i++)
         {
-            if(a[maj_index] == a[i]) 
+            if(a[maj_index] == a[i])
             	count++;
             else 
             	count--;
@@ -72,7 +80,7 @@ public class _169_Majority_Element_E {
         return a[maj_index];
     }
       
-    /* Function to check if the candidate occurs more than n/2 times */
+    /* 判断候选元素can出现次数是否超过n/2 */
     static boolean isMajority(int a[], int size, int cand)
     {
         int i, count = 0;
