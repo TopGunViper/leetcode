@@ -21,30 +21,65 @@ public class _215_Kth_Largest_Element_in_an_Array_M {
 	 * @param k
 	 * @return 第K大的数
 	 */
-    public int findKthLargest(int[] nums, int k) {
-    	int len = nums.length;
-        for(int i = 0; i < k; i++){
-        	int max = i;
-        	for(int j = i+1; j < len; j++){
-        		if(nums[max] < nums[j]){
-        			max = j;
-        		}
-        	}
-        	if(max != i){
-        		int t = nums[max];
-        		nums[max] = nums[i];
-        		nums[i] = t;
-        	}
-        }
-        return nums[k-1];
-    }
-    /**
-     * 找第K个数，堆排序最为合适
-     * @param nums
-     * @param k
-     * @return
-     */
-    public int findKthLargest2(int[] nums, int k) {
-    	return 0;
-    }
+	public int findKthLargest2(int[] nums, int k) {
+		int len = nums.length;
+		for(int i = 0; i < k; i++){
+			int max = i;
+			for(int j = i+1; j < len; j++){
+				if(nums[max] < nums[j]){
+					max = j;
+				}
+			}
+			if(max != i){
+				int t = nums[max];
+				nums[max] = nums[i];
+				nums[i] = t;
+			}
+		}
+		return nums[k-1];
+	}
+	/**
+	 * 利用快排的partition，使pivot逐步逼近k。时间复杂度O(nlogk)
+	 * 
+	 * @param nums
+	 * @param k
+	 * @return
+	 */
+	public int findKthLargest(int[] nums, int k) {
+		if(nums.length == 1) return nums[0];
+		int start = 0,end = nums.length-1;
+		while(start <= end){
+			int pivot = partition(nums, start, end);
+			if (pivot == k) {
+				return nums[pivot];
+			} else if (pivot > k) {
+				end = pivot-1;
+			} else{
+				start = pivot+1;
+			}
+		}
+		return 0;
+	}
+
+	private static int partition(int array[], int start, int end) {
+		int pivot = array[start];
+
+		while (start < end) {
+			while (start < end && array[end] >= pivot) {
+				end--;
+			}
+			if (start < end) {  
+				array[start] = array[end];
+				while (start < end && array[start] <= pivot) {
+					start++;
+				}
+				if (start < end) {  // found a larger array
+					array[end] = array[start];
+				}
+			}
+		}
+		array[start] = pivot;
+		return start;
+	}
+
 }
