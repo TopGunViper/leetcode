@@ -50,9 +50,10 @@ public class _215_Kth_Largest_Element_in_an_Array_M {
 		int start = 0,end = nums.length-1;
 		while(start <= end){
 			int pivot = partition(nums, start, end);
-			if (pivot == k) {
+			//System.out.print("pivot:" + pivot);
+			if (pivot == k-1) {
 				return nums[pivot];
-			} else if (pivot > k) {
+			} else if (pivot > k-1) {
 				end = pivot-1;
 			} else{
 				start = pivot+1;
@@ -60,26 +61,29 @@ public class _215_Kth_Largest_Element_in_an_Array_M {
 		}
 		return 0;
 	}
-
-	private static int partition(int array[], int start, int end) {
-		int pivot = array[start];
-
-		while (start < end) {
-			while (start < end && array[end] >= pivot) {
-				end--;
+	/**
+	 * 以第一个元素为基准数，从大到小排序
+	 * @param array
+	 * @param low
+	 * @param high
+	 * @return 返回基准数位置
+	 */
+	private  int partition(int array[], int low, int high) {
+		int key = array[low];
+		while(low < high){
+			while(low < high && array[high] < key){
+				high--;
 			}
-			if (start < end) {  
-				array[start] = array[end];
-				while (start < end && array[start] <= pivot) {
-					start++;
-				}
-				if (start < end) {  // found a larger array
-					array[end] = array[start];
-				}
+			if(low < high)
+				array[low++] = array[high];
+			
+			while(low < high && array[low] > key){
+				low++;
 			}
+			if(low < high)
+				array[high--] = array[low];
 		}
-		array[start] = pivot;
-		return start;
+		array[low] = key;
+		return low;
 	}
-
 }
