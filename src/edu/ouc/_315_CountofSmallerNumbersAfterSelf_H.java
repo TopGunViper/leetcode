@@ -21,46 +21,87 @@ To the right of 1 there is 0 smaller element.
 Return the array [2, 1, 1, 0]. 
 
  * @author wqx
- *
+ *	
  */
 public class _315_CountofSmallerNumbersAfterSelf_H {
-	
+	public static void main(String args[]){
+		int[] nums = {5,2,6,1};  
+		countSmaller(nums);  
+	}
 	/**
-	 * 从nums[len-1]开始遍历
-	 * 将当前元素右侧的数组进行排序，然后再进行二分查找
-	 * 时间复杂度：O()
+	 * 时间复杂度：O(N*logN)，空间复杂度：O(N)，同归并排序
+	 * 思路：
+	 * 给定数组：[1 7 3 4 2 6],进行归并排序（递减）
+	 * 归并过程中的某个状态如下：
+	 * (7 3 1)(6 4 2)
+	 * 此时 7 > 6,那么6之后的数一定也小于7，所以只要计算6之后还有多少个数就可以。
+	 * 这里就是利用了归并排序中部分数组有序的特性
+	 * 
 	 * @param nums
 	 * @return
 	 */
-	public List<Integer> countSmaller(int[] nums) {
+	public static List<Integer> countSmaller(int[] nums) {
     	int len = nums.length;
     	List<Integer> counts = new ArrayList<Integer>();
-    	List<Integer> sortedArray = new ArrayList<Integer>();
-    	if(len == 1){
+    	Node[] array = new Node[len];
+    	
+    	for(int i = 0; i < len; i++){
+    		Node node = new Node(nums[i],i);
     		counts.add(0);
-    		return counts;
+    		array[i] = node;
     	}
-    	for(int i = len-2; i >= 0 ; i--){
-    		int pos = findPosition(nums[i],sortedArray);
-    		counts.add(pos);
-    		
+    	mergeSort(array,0,len-1);
+    	for(Node n : array){
+    		counts.set(n.index,n.counts);
     	}
+    	return counts;
 	}
-	public int findPosition(int num,List<Integer> sortedArray){
-		int low = 0,high = sortedArray.size();
-		while(low <= high){
-			int mid = (low+high)/2;
-			if(sortedArray.get(mid) == num){
-				return mid+1;
-			}else if(sortedArray.get(mid) > num){
-				high = mid-1;
-			}else{
-				low = mid+1;
-			}
+	public static void mergeSort(Node nums[],int low,int high){
+		int mid = (low+high)/2;
+		if(low < high){
+			// 左半边
+			mergeSort(nums,low,mid);
+			//右半边
+			mergeSort(nums,mid+1,high);
+			//左右两边有序数组合并
+			merge(nums,low,mid,high);
 		}
-		return 
 	}
 	
+	public static void merge(Node nums[],int low,int mid,int high){
+		Node [] tmp = new Node[high-low+1];
+		int i = low,j = mid+1,k = 0;
+		
+		while(i <= mid && j <= high){
+			if(nums[i].elem > nums[j].elem){
+				tmp[k] = nums[i];
+				nums[i].counts += (high-j+1);
+				k++;i++;
+			}else {
+				tmp[k++] = nums[j++];
+			}
+		}
+		while(i <= mid){
+			tmp[k++] = nums[i++];
+		}
+		while(j <= high){
+			tmp[k++] = nums[j++];
+		}
+		//新的有序数组覆盖旧数组
+		for(int p = 0; p < tmp.length; p++){
+			nums[low+p] = tmp[p];
+		}
+	}
+	static class Node{
+		int elem;
+		int index;
+		int counts;
+		public Node(int elem,int index){
+			this.elem = elem;
+			this.index = index;
+			counts = 0;
+		}
+	}
 	/**
 	 * 时间复杂度O(n^2)  TLE!!!
 	 * @param nums
