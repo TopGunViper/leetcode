@@ -21,6 +21,12 @@ public class _23_MergeKSortedLists {
     	}
     	return null;
     }
+    /**
+     * ͬ  Merge Two Sorted List
+     * @param l1
+     * @param l2
+     * @return
+     */
     public ListNode merge(ListNode l1,ListNode l2){
     	if(l1 == null)
     		return l2;
