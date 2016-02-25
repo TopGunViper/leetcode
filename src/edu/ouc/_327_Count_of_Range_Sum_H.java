@@ -22,63 +22,74 @@ The three ranges are : [0, 0], [2, 2], [0, 2] and their respective sums are: -2,
  * 
  */
 public class _327_Count_of_Range_Sum_H {
-	private int lower;
-	private int upper;
-    public int countRangeSum(int[] nums, int lower, int upper) {
-    	this.lower = lower;
-    	this.upper = upper;
-    	
-        for(int i = 1; i < nums.length; i++){
-        	nums[i] = nums[i] + nums[i-1];
-        }
-        if(lower < 0) lower = 0;
-        if(upper >= nums.length) upper = nums.length-1;
-        if(lower == 0){
-        	return nums[upper];
-        }
-        return nums[upper] - nums[lower];
-    }
-	public  List<Integer> countSmaller(int[] nums) {
-    	int len = nums.length;
-    	List<Integer> counts = new ArrayList<Integer>();
-    	mergeSort(nums,0,len-1);
-    	return counts;
+	private static int counts;
+	public static void main(String []args){
+		int nums[] = {-2,5,-1};
+		counts = 0;
+		countRangeSum(nums,-2,2);
+		System.out.println("counts:" + counts);
 	}
-	public  void mergeSort(int nums[],int low,int high){
+    public static int countRangeSum(int[] nums, int lower, int upper) {
+    	int len = nums.length;
+        int[] sums = new int[len + 1];
+        for (int i = 0; i < len; ++i)
+            sums[i + 1] = sums[i] + nums[i];
+    	mergeSort(sums,0,len-1,lower,upper);
+    	return counts;
+    }
+	/**
+	 * sums[i]:表示nums中前i个数的和
+	 * 则 S(i,j) = sums[j] - sums[i]
+	 * 
+	 * 
+	 * @param sums
+	 * @param low
+	 * @param high
+	 */
+	public static  void mergeSort(int sums[],int low,int high,int lower, int upper){
 		int mid = (low+high)/2;
 		if(low < high){
 			// 左半边
-			mergeSort(nums,low,mid);
+			mergeSort(sums,low,mid,lower,upper);
 			//右半边
-			mergeSort(nums,mid+1,high);
+			mergeSort(sums,mid+1,high,lower,upper);
 			//左右两边有序数组合并
-			merge(nums,low,mid,high);
+			merge(sums,low,mid,high,lower,upper);
 		}
 	}
-	
-	public  void merge(int nums[],int low,int mid,int high){
+	/**
+	 * 
+	 * @param sums
+	 * @param low
+	 * @param mid
+	 * @param high
+	 */
+	public static  void merge(int sums[],int low,int mid,int high,int lower, int upper){
 		int [] tmp = new int[high-low+1];
 		int i = low,j = mid+1,k = 0;
 		int p = mid+1,q = mid+1;
+		System.out.println("low:" + low + ",high:" + high + ",mid:" + mid);
 		while(i <= mid && j <= high){
-			if(nums[i] < nums[j]){
-				tmp[k] = nums[i];
-				k++;i++;
-		        while (p < high && nums[p] - nums[i] < lower) p++;
-		        while (q < high && nums[j] - nums[i] <= upper) q++;
+	        while (p <= high && sums[p] - sums[i] < lower) p++;
+	        while (q <= high && sums[j] - sums[i] <= upper) q++;
+	        System.out.println("p:" + p + ",q:" + q);
+	        counts += q-p;
+	        
+			if(sums[i] < sums[j]){
+				tmp[k++] = sums[i++];
 			}else {
-				tmp[k++] = nums[j++];
+				tmp[k++] = sums[j++];
 			}
 		}
 		while(i <= mid){
-			tmp[k++] = nums[i++];
+			tmp[k++] = sums[i++];
 		}
 		while(j <= high){
-			tmp[k++] = nums[j++];
+			tmp[k++] = sums[j++];
 		}
 		//新的有序数组覆盖旧数组
 		for(p = 0; p < tmp.length; p++){
-			nums[low+p] = tmp[p];
+			sums[low+p] = tmp[p];
 		}
 	}
 }
