@@ -23,7 +23,7 @@ Examples:
 public class _282_Expression_Add_Operators_H {
 	
     public List<String> addOperators(String num, int target) {
-        
+        return null;
     }
     public List<Integer> result(String num, int target){
     	List<Integer> results = new ArrayList<Integer>();
@@ -44,5 +44,6 @@ public class _282_Expression_Add_Operators_H {
     			}
     		}
     	}
+    	return null;
     }
 }

@@ -1,8 +1,8 @@
 package edu.ouc;
 
 public class TreeNode {
-	int val;
-	TreeNode right;
-	TreeNode left;
-	TreeNode(int x){val = x;}
+	public int val;
+	public TreeNode right;
+	public TreeNode left;
+	public TreeNode(int x){val = x;}
 }
