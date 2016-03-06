@@ -21,32 +21,60 @@ The first node is considered odd, the second node even and so on ...
  *
  */
 public class _328_Odd_Even_Linked_List_E {
-	
-    public ListNode oddEvenList(ListNode head) {
-        ListNode evenList = new ListNode(0);
-        evenList.next = null;
-        ListNode tail = evenList;
-        ListNode pre,p,tmp;
-        
-        pre = head;
-        p = head.next;
-        
-        int step = 0;
-        
-        while(p != null){
-        	if(step%2 == 0){
-        		tmp = p;
-        		
-        		p = p.next;
-        		pre.next = p;
-        		
-        		tmp.next = tail.next;
-        		tail.next = tmp;
-        		tail = tmp;
-        	}
-    		
-    		
-        	step++;
-        }
-    }
+	/**
+	 *  Memory Limit Exceeded 
+	 *  
+	 * @param head
+	 * @return
+	 */
+	public ListNode oddEvenList(ListNode head) {
+		if(head == null || head.next == null) return head;
+		ListNode evenList = new ListNode(0);
+		evenList.next = null;
+		ListNode tail = evenList;
+		ListNode pre,p,tmp;
+
+		pre = head;
+		p = head.next;
+
+		int step = 0;
+
+		while(p != null){
+			if(step%2 == 0){
+				tmp = p;
+
+				p = p.next;
+				pre.next = p;
+
+				tmp.next = tail.next;
+				tail.next = tmp;
+				tail = tmp;
+			}else{
+				p = p.next;
+				pre = p;
+			}
+			step++;
+		}
+		pre.next = evenList.next;
+		return head;
+	}
+	/**
+	 * ”≈ªØ∞Ê
+	 * 
+	 * @param head
+	 * @return
+	 */
+	public ListNode oddEvenList2(ListNode head) {
+		if (head != null) {
+			ListNode odd = head, even = head.next, evenHead = even; 
+			while (even != null && even.next != null) {
+				odd.next = odd.next.next; 
+				even.next = even.next.next; 
+				odd = odd.next;
+				even = even.next;
+			}
+			odd.next = evenHead; 
+		}
+		return head;
+	}
 }
