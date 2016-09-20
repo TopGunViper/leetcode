@@ -1,4 +1,6 @@
-package edu.ouc;
+package edu.ouc.dfs;
+
+import edu.ouc.TreeNode;
 
 /**
  *  

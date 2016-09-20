@@ -1,9 +1,11 @@
-package edu.ouc;
+package edu.ouc.dfs;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+
+import edu.ouc.TreeNode;
 
 /**
  * Given a binary tree, imagine yourself standing on the right side of it, 

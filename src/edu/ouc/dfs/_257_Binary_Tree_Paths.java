@@ -1,7 +1,9 @@
-package edu.ouc;
+package edu.ouc.dfs;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.ouc.TreeNode;
 /**
  *  Given a binary tree, return all root-to-leaf paths.
 
