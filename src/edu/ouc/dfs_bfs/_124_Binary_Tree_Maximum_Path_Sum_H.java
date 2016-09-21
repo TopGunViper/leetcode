@@ -1,4 +1,4 @@
-package edu.ouc.dfs;
+package edu.ouc.dfs_bfs;
 
 import edu.ouc.TreeNode;
 

@@ -1,4 +1,4 @@
-package edu.ouc;
+package edu.ouc.dfs_bfs;
 
 /**
  *  Given a binary tree and a sum, determine if the tree has a root-to-leaf path such 

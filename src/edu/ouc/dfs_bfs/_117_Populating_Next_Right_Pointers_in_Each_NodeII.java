@@ -1,4 +1,4 @@
-package edu.ouc;
+package edu.ouc.dfs_bfs;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

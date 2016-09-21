@@ -1,4 +1,4 @@
-package edu.ouc;
+package edu.ouc.dfs_bfs;
 /**
  * Given inorder and postorder traversal of a tree, construct the binary tree.
  * 
