@@ -14,7 +14,7 @@ public class _777_Swap_Adjacent_in_LR_String {
             if (s[i] == e[i]) {
                 continue;
             }
-            if ((e[i] == 'stepX' && s[i] == 'R') || (e[i] == 'L' && s[i] == 'stepX')) {
+            if ((e[i] == 'X' && s[i] == 'R') || (e[i] == 'L' && s[i] == 'X')) {
                 next = Math.max(next, i + 1);
                 while (next < n && s[next] == s[i]) {
                     next++;

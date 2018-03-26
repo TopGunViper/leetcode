@@ -8,16 +8,14 @@ public class _789_Escape_The_Ghosts {
 
 
     public boolean escapeGhosts(int[][] ghosts, int[] target) {
-        boolean retVal = true;
         int targetDis = distance(0,0, target[0], target[1]);
         for(int i = 0; i < ghosts.length; i++){
             int dis = distance(ghosts[i][0],ghosts[i][1], target[0], target[1]);
             if(targetDis - dis >= 0){
-                retVal = false;
-                break;
+                return false;
             }
         }
-        return retVal;
+        return true;
     }
 
     private int distance(int x1,int y1, int x2, int y2){
