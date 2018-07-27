@@ -11,3 +11,5 @@
 129. Sum Root to Leaf Numbers
 124. Binary Tree Maximum Path Sum
 ```
+### [Dynamic Programming]
+121. Best Time to Buy and Sell Stock
