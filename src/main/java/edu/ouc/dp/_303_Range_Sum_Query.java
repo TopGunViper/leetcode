@@ -1,4 +1,6 @@
-package edu.ouc;
+package edu.ouc.dp;
+
+import edu.ouc.NumArray;
 
 /**
  * Given an integer array nums, find the sum of the elements between indices i and j (i ¡Ü j); inclusive.

@@ -1,4 +1,4 @@
-package edu.ouc;
+package edu.ouc.dp;
 
 /**
  * Maximum Subarray

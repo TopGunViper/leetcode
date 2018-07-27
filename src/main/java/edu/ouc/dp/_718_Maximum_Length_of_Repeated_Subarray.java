@@ -1,6 +1,4 @@
-package edu.ouc.contest56;
-
-import java.util.Arrays;
+package edu.ouc.dp;
 
 import com.sun.tools.javac.util.Assert;
 
