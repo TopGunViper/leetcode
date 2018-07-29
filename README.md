@@ -13,4 +13,4 @@
 ```
 ### [Dynamic Programming]
 121. Best Time to Buy and Sell Stock
-
+firstly, add some contents to README on branch:learn
