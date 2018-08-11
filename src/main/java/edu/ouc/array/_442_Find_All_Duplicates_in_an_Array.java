@@ -1,6 +1,5 @@
 package edu.ouc.array;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -60,10 +59,10 @@ public class _442_Find_All_Duplicates_in_an_Array {
         _442_Find_All_Duplicates_in_an_Array
                 tester = new _442_Find_All_Duplicates_in_an_Array();
         int[] arr = {4, 3, 2, 7, 8, 2, 3, 1};
-        Integer[] expected = {2, 3};
-        System.out.println(Arrays.toString(tester.findDuplicates_nice_solution(arr).toArray()));
+        Integer[] expected = {3, 2};
+//        System.out.println(Arrays.toString(tester.findDuplicates_nice_solution(arr).toArray()));
 
-        //Assert.assertArrayEquals(expected, tester.findDuplicates(arr).toArray());
+        Assert.assertArrayEquals(expected, tester.findDuplicates(arr).toArray());
 
     }
 }
