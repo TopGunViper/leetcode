@@ -1,5 +1,9 @@
 ## leetcode
 
+### Tips
+1. Pay attention to the edge cases. e.g. NPE. IndexOutOfBound
+2. Division by zero
+
 ### [DFS VS BFS](https://github.com/TopGunViper/leetcode/tree/master/src/edu/ouc/dfs)
 ```
 301. Remove Invalid Parentheses
@@ -14,3 +18,4 @@
 ### [Dynamic Programming]
 121. Best Time to Buy and Sell Stock
 firstly, add some contents to README on branch:learn
+
