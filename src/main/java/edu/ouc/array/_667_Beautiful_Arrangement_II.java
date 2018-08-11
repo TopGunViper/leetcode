@@ -1,85 +1,53 @@
 package edu.ouc.array;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.IntStream;
 
 import org.junit.Assert;
 
 /**
- * Given an array nums of n integers where n > 1,  return an array output such that
- * output[i] is equal to the product of all the elements of nums except nums[i].
+ * Given two integers n and k, you need to construct a list which contains n different positive integers
+ * ranging from 1 to n and obeys the following requirement:
  * <p>
- * Example:
+ * Suppose this list is [a1, a2, a3, ... , an], then the list [|a1 - a2|, |a2 - a3|, |a3 - a4|, ... , |an-1 - an|]
+ * has exactly k distinct integers.
  * <p>
- * Input:  [1,2,3,4]
- * Output: [24,12,8,6]
- * <p>
- * Note: Please solve it without division and in O(n).
- * <p>
- * Follow up:
- * Could you solve it with constant space complexity? (The output array does not count as
- * extra space for the purpose of space complexity analysis.)
+ * Note:
+ * The n and k are in the range 1 <= k < n <= 104.
  */
-public class _238_Product_of_Array_Except_Self {
+public class _667_Beautiful_Arrangement_II {
 
     /**
-     * bad idea!
-     * <p>
-     * encounter division by zero error if any element in <code>nums</code> has a value of zero.
+     * refer to other's idea.
      */
-    public int[] productExceptSelf_bad_idea(int[] nums) {
-        int product = Arrays.stream(nums).reduce((a, b) -> (a * b)).getAsInt();
-        for (int i = 0; i < nums.length; i++) {
-            nums[i] = nums[i] != 0 ? product / nums[i] : nums[i];
+    public int[] constructArray(int n, int k) {
+        int[] ans = new int[n];
+        int c = 0;
+        for (int v = 1; v < n - k; v++) {
+            ans[c++] = v;
         }
-        return nums;
+        for (int i = 0; i <= k; i++) {
+            ans[c++] = (i % 2 == 0) ? (n - k + i / 2) : (n - i / 2);
+        }
+        return ans;
     }
-
-    /**
-     * 1. Space Complexity: O(1)
-     * 2. Time Complexity: O(N)
-     *
-     */
-    public int[] productExceptSelf(int[] nums) {
-        if (nums.length <= 1) {
-            return nums;
-        }
-        int res[] = new int[nums.length];
-        res[0] = 1;
-        for (int i = 1; i < nums.length; i++) {
-            res[i] = res[i - 1] * nums[i - 1];
-        }
-        int prod = 1;
-        for (int i = nums.length - 2; i >= 0; i--) {
-            prod *= nums[i + 1];
-            res[i] *= prod;
-        }
-        return res;
-    }
-
 
     public static void main(String[] args) {
 
         //test case1
-        _238_Product_of_Array_Except_Self
-                tester = new _238_Product_of_Array_Except_Self();
-        int[] arr = {1, 2, 3, 4};
-        int[] expected = {24, 12, 8, 6};
-
-        Assert.assertArrayEquals(expected, tester.productExceptSelf(arr));
-
-        int[] arr2 = {1,0};
-        int[] expected2 = {0,1};
-
-        Assert.assertArrayEquals(expected2, tester.productExceptSelf(arr2));
-        int[] arr3 = {};
-        int[] expected3 = {};
-
-        Assert.assertArrayEquals(expected3, tester.productExceptSelf(arr3));
-
-        int[] arr4 = {0,0};
-        int[] expected4 = {0,0};
-
-        Assert.assertArrayEquals(expected4, tester.productExceptSelf(arr4));
+        _667_Beautiful_Arrangement_II
+                tester = new _667_Beautiful_Arrangement_II();
+        int[] expected = {1, 2, 3};
+        int n = 3, k = 1;
+        Assert.assertArrayEquals(expected, tester.constructArray(n, k));
+        n = 3;
+        k = 2;
+        int[] expected2 = {1, 3, 2};
+        Assert.assertArrayEquals(expected2, tester.constructArray(n, k));
 
     }
 }
