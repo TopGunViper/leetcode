@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.sun.tools.javac.util.Assert;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Given a non-empty 2D array grid of 0's and 1's, an island is a group of 1's (representing land) connected
@@ -74,19 +74,19 @@ public class _695_Max_Area_of_Island {
         /**
          * Given the above grid, return 6
          */
-        Assert.check(tester.maxAreaOfIsland(testGrid1) == 6);
+        assertTrue(tester.maxAreaOfIsland(testGrid1) == 6);
 
         int[][] testGrid2 = {{0, 0, 0, 0, 0, 0, 0, 0}};
         // Given the above grid, return 0
-        Assert.check(tester.maxAreaOfIsland(testGrid2) == 0);
+        assertTrue(tester.maxAreaOfIsland(testGrid2) == 0);
 
         int[][] testGrid3 = {{0, 0, 0, 0, 1, 0, 0, 0}};
         // Given the above grid, return 1
-        Assert.check(tester.maxAreaOfIsland(testGrid3) == 1);
+        assertTrue(tester.maxAreaOfIsland(testGrid3) == 1);
 
         int[][] testGrid4 = {{0}, {0}, {0}, {0}, {0}, {0}, {0}, {0}};
         // Given the above grid, return 0
-        Assert.check(tester.maxAreaOfIsland(testGrid4) == 0);
+        assertTrue(tester.maxAreaOfIsland(testGrid4) == 0);
 
     }
 }

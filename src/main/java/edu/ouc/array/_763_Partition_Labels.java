@@ -1,12 +1,9 @@
-package edu.ouc.contest67;
+package edu.ouc.array;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.sun.tools.javac.util.Assert;
+import java.util.Set;
 
 /**
  * @author wqx
@@ -14,11 +11,8 @@ import com.sun.tools.javac.util.Assert;
 public class _763_Partition_Labels {
 
     /**
-     * Solution:
-     *
-     * @param S
-     *
-     * @return
+     * Time Complexity: O(N*N)
+     * Space Complexity: O(1)
      */
     public List<Integer> partitionLabels(String S) {
         List<Integer> res = new LinkedList<>();
@@ -32,7 +26,6 @@ public class _763_Partition_Labels {
             }
             char cur = S.charAt(i);
             int curLastIndex = S.lastIndexOf(cur);
-            //System.out.println("cur:" + cur + ",curLastIndex:" + curLastIndex + "partBegin:" + partBegin + ",partEnd:"+ partEnd);
             if (curLastIndex > partEnd) {
                 partEnd = curLastIndex;
             }
@@ -41,11 +34,34 @@ public class _763_Partition_Labels {
         return res;
     }
 
+    /**
+     * Time Complexity: O(N)
+     * Space Complexity: O(1)
+     */
+    public List<Integer> partitionLabels2(String S) {
+        List<Integer> res = new LinkedList<>();
+        int partBegin = 0;
+        int partEnd = 0;
+        int[] lastIndexes = new int[26];
+        for(int i = 0; i < S.length(); i++){
+            lastIndexes[S.charAt(i) - 'a'] = i;
+        }
+        for (int i = 0; i < S.length(); i++) {
+            char cur = S.charAt(i);
+            partEnd = Math.max(partEnd, lastIndexes[cur - 'a']);
+            if (i == partEnd) {
+                res.add(partEnd - partBegin + 1);
+                partBegin = partEnd + 1;
+            }
+        }
+        return res;
+    }
+
     public static void main(String args[]) {
         //test case1
         _763_Partition_Labels tester = new _763_Partition_Labels();
         String S = "ababcbacadefegdehijhklij";
-        System.out.println(S.lastIndexOf('a', 3));
+
         List<Integer> res = tester.partitionLabels(S);
         for (Integer i : res) {
             System.out.println(i);

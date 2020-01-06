@@ -2,7 +2,7 @@ package edu.ouc.contest56;
 
 import java.util.Arrays;
 
-import com.sun.tools.javac.util.Assert;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author wqx
@@ -52,24 +52,24 @@ public class _443_String_Compression {
         _443_String_Compression tester = new _443_String_Compression();
 
         char[] chars1 = {'a', 'a', 'b', 'b', 'c', 'c', 'c'};
-        //Assert.check(tester.compress(chars1) == 6);
+        //assertTrue(tester.compress(chars1) == 6);
 
         char[] chars2 = {'a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b'};
-        //Assert.check(tester.compress(chars2) == 4);
+        //assertTrue(tester.compress(chars2) == 4);
 
         char[] chars3 = {'a'};
-        //Assert.check(tester.compress(chars3) == 1);
+        //assertTrue(tester.compress(chars3) == 1);
         
         char[] chars4 = {'a','a','b','b','c','c','c'};
-        //Assert.check(tester.compress(chars4) == 6);
+        //assertTrue(tester.compress(chars4) == 6);
         //System.out.println(Arrays.toString(chars4));
         
         char[] chars5 = {'a','a','a','b','b','a','a'};
-        Assert.check(tester.compress(chars5) == 6);
+        assertTrue(tester.compress(chars5) == 6);
         System.out.println(Arrays.toString(chars5));
 
         char[] chars6 = {'a', 'a'};
-        Assert.check(tester.compress(chars6) == 2);
+        assertTrue(tester.compress(chars6) == 2);
         System.out.println(Arrays.toString(chars6));
     }
 }

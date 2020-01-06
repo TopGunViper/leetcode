@@ -1,6 +1,7 @@
 package edu.ouc.contest56;
 
-import com.sun.tools.javac.util.Assert;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author wqx
@@ -41,16 +42,16 @@ public class _717_1_bit_and_2_bit_Characters {
          Also, this is the minimum number of stickers necessary to form the target string.
          */
         int[] bits1 = {1, 0, 0};
-        Assert.check(tester.isOneBitCharacter(bits1) == true);
+        assertTrue(tester.isOneBitCharacter(bits1));
 
         int[] bits2 = {1, 1, 1, 0};
-        Assert.check(tester.isOneBitCharacter(bits2) == false);
+        assertFalse(tester.isOneBitCharacter(bits2));
 
         int[] bits3 = {0};
-        Assert.check(tester.isOneBitCharacter(bits3) == true);
+        assertTrue(tester.isOneBitCharacter(bits3));
 
         int[] bits4 = {0, 1, 0};
-        Assert.check(tester.isOneBitCharacter(bits4) == false);
+        assertTrue(tester.isOneBitCharacter(bits4));
 
     }
 }

@@ -2,7 +2,7 @@ package edu.ouc.contest66;
 
 import java.util.Arrays;
 
-import com.sun.tools.javac.util.Assert;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author wqx

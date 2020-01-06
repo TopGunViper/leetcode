@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.sun.tools.javac.util.Assert;
+import static org.junit.Assert.assertTrue;
 
 /**
  * We are given N different types of stickers. Each sticker has a lowercase English word on it.
@@ -45,13 +45,13 @@ public class _691_Stickers_to_Spell_Word {
          After cutting and rearrange the letters of those stickers, we can form the target "thehat".
          Also, this is the minimum number of stickers necessary to form the target string.
          */
-        Assert.check(tester.minStickers(stickers, target) == 3);
+        assertTrue(tester.minStickers(stickers, target) == 3);
 
         String[] stickers2 = {"notice","possible"};
         String target2 = "basicbasic";
         /**
          * We can't form the target "basicbasic" from cutting letters from the given stickers.
          */
-        Assert.check(tester.minStickers(stickers2, target2) == -1);
+        assertTrue(tester.minStickers(stickers2, target2) == -1);
     }
 }

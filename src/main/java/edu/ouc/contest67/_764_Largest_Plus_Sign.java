@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.sun.tools.javac.util.Assert;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author wqx
@@ -61,14 +61,14 @@ public class _764_Largest_Plus_Sign {
         _764_Largest_Plus_Sign tester = new _764_Largest_Plus_Sign();
         int N = 5;
         int[][] mines = {{4, 2}};
-        Assert.check(tester.orderOfLargestPlusSign(N, mines) == 2);
+        assertTrue(tester.orderOfLargestPlusSign(N, mines) == 2);
 
         N = 2;
         int[][] mines2 = {};
-        Assert.check(tester.orderOfLargestPlusSign(N, mines2) == 1);
+        assertTrue(tester.orderOfLargestPlusSign(N, mines2) == 1);
 
         N = 1;
         int[][] mines3 = {{0, 0}};
-        Assert.check(tester.orderOfLargestPlusSign(N, mines3) == 0);
+        assertTrue(tester.orderOfLargestPlusSign(N, mines3) == 0);
     }
 }

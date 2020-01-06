@@ -1,6 +1,6 @@
 package edu.ouc.dp;
 
-import com.sun.tools.javac.util.Assert;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author wqx
@@ -33,10 +33,10 @@ public class _746_Min_Cost_Climbing_Stairs {
         _746_Min_Cost_Climbing_Stairs tester = new _746_Min_Cost_Climbing_Stairs();
 
         int[] cost = {10, 15, 20};
-        Assert.check(tester.minCostClimbingStairs(cost) == 15);
+        assertTrue(tester.minCostClimbingStairs(cost) == 15);
 
         int[] cost2 = {1, 100, 1, 1, 1, 100, 1, 1, 100, 1};
-        Assert.check(tester.minCostClimbingStairs(cost2) == 6);
+        assertTrue(tester.minCostClimbingStairs(cost2) == 6);
 
     }
 }

@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.sun.tools.javac.util.Assert;
+import static org.junit.Assert.assertTrue;
 
 /**
  * 761. Special Binary String My SubmissionsBack to Contest
@@ -103,10 +103,10 @@ public class _761_Special_Binary_String {
         System.out.println(tester.isSpecial("1"));
         String S = "11011000";
 
-        //Assert.check(tester.makeLargestSpecial2(S).equals("11100100"));
+        //assertTrue(tester.makeLargestSpecial2(S).equals("11100100"));
 
         S = "101100101100";
-        Assert.check(tester.makeLargestSpecial2(S).equals("110011001010"));
+        assertTrue(tester.makeLargestSpecial2(S).equals("110011001010"));
     }
 
     public String makeLargestSpecial2(String S) {

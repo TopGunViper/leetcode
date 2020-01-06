@@ -1,6 +1,6 @@
 package edu.ouc.contest67;
 
-import com.sun.tools.javac.util.Assert;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author wqx
@@ -58,12 +58,12 @@ public class _762_Prime_Number_of_Set_Bits_in_Binary_Representation {
         int L = 6;
         int R = 10;
 
-        Assert.check(tester.countPrimeSetBits(L, R) == 4);
+        assertTrue(tester.countPrimeSetBits(L, R) == 4);
 
         L = 10;
         R = 15;
 
-        Assert.check(tester.countPrimeSetBits(L, R) == 5);
+        assertTrue(tester.countPrimeSetBits(L, R) == 5);
 
         L = 842;
         R = 888;

@@ -1,6 +1,6 @@
 package edu.ouc.dp;
 
-import com.sun.tools.javac.util.Assert;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author wqx
@@ -80,11 +80,11 @@ public class _718_Maximum_Length_of_Repeated_Subarray {
 
         int[] A = {1, 2, 3, 2, 1};
         int[] B = {3, 2, 1, 4, 7};
-        Assert.check(tester.findLength(A, B) == 3);
+        assertTrue(tester.findLength(A, B) == 3);
 
         int[] A2 = {0,0,0,0,1};
         int[] B2 = {1,0,0,0,0};
-        Assert.check(tester.findLength(A2, B2) == 4);
+        assertTrue(tester.findLength(A2, B2) == 4);
 
 
     }

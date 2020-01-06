@@ -2,7 +2,7 @@ package edu.ouc.contest56;
 
 import java.util.Arrays;
 
-import com.sun.tools.javac.util.Assert;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Given an integer array, return the k-th smallest distance among all the pairs.
@@ -64,7 +64,7 @@ public class _719_Find_K_th_Smallest_Pair_Distance {
          * (3,1) -> 2
          * Then the 1st smallest distance pair is (1,1), and its distance is 0.
          */
-        Assert.check(tester.smallestDistancePair(nums, k) == 5);
+        assertTrue(tester.smallestDistancePair(nums, k) == 5);
 
     }
 }
